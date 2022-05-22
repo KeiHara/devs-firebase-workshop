@@ -6,8 +6,14 @@ import './App.css';
 import MainPage from './Components/MainPage/MainPage';
 
 
-const firebaseConfig = { // todo put in external file
-  // your api key
+const firebaseConfig = { 
+  apiKey: "AIzaSyCyw-Z3dl-9BAF5Y6GtwsI7l01w9KeYYV8",
+  authDomain: "to-do-app-devs.firebaseapp.com",
+  projectId: "to-do-app-devs",
+  storageBucket: "to-do-app-devs.appspot.com",
+  messagingSenderId: "726684151650",
+  appId: "1:726684151650:web:63206fa50d3030b289463b",
+  measurementId: "G-1RP30X8QTN"
 };
 
 
@@ -22,7 +28,12 @@ function App() {
     const getNotes = async () => {
       const notesRef = collection(db, 'notes');
       const notesSnapShot = await getDocs(notesRef)
-      const notesList = notesSnapShot.docs.map(doc => doc.data());
+      const notesList = notesSnapShot.docs.map( snapShot => {
+        return {
+          ...snapShot.data(),
+          ref: snapShot.ref
+        }
+      });
       setAllNotes(notesList)
     }
     getNotes()
@@ -36,7 +47,5 @@ function App() {
     </div>
   );
 }
-
-
 
 export default App;
