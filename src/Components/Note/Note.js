@@ -9,7 +9,7 @@ export default function Note({noteTitle, noteCategory, noteMessage, allNotes, se
         const newAllNotes = [];
         
         // Add all notes to array except the deleted note
-        allNotes.map(note => {
+        allNotes.forEach(note => {
             if (note.title !== noteTitle && note.category !== noteCategory) {
                 newAllNotes.push(note);
             }
