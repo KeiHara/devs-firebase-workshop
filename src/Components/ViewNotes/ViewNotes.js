@@ -9,7 +9,7 @@ export default function ViewNotes({allNotes, setAllNotes}) {
             <div className="notes-grid">
                 {allNotes.map((note) => {
                     return (
-                        <Note noteRef={note.ref} noteTitle={note.title} noteCategory={note.category} noteMessage={note.message} allNotes={allNotes} setAllNotes={setAllNotes} />
+                        <Note noteId={note.id} noteTitle={note.title} noteCategory={note.category} noteMessage={note.message} allNotes={allNotes} setAllNotes={setAllNotes} />
                 )})}
             </div>
         </div>

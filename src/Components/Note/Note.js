@@ -1,23 +1,16 @@
-import { deleteDoc } from "firebase/firestore/lite";
+import { deleteDoc, doc } from "firebase/firestore/lite";
 import React from "react";
+import { db } from "../../App";
 import "./Note.css";
 
-export default function Note({noteTitle, noteCategory, noteMessage, allNotes, setAllNotes, noteRef}) {
+export default function Note({noteTitle, noteCategory, noteMessage, noteId, allNotes, setAllNotes}) {
 
     function deleteNote() {
       // Add all notes to array except the deleted note
-      const newAllNotes = [];
-      deleteDoc(noteRef).then(() => {
-        allNotes.forEach(note => {
-          if (noteRef.id !== note.Ref.id) {
-              newAllNotes.push(note);
-          }
-        })
+      deleteDoc(doc(db, 'notes', noteId)).then(() => {
+        const newAllNotes = allNotes.filter(note => note.id !== noteId)
+        setAllNotes(newAllNotes);
       })
-
-      // Update state variable that stores all notes to contain new array of notes
-      setAllNotes(newAllNotes);
-   
     }
 
     return (
